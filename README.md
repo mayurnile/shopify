@@ -89,6 +89,11 @@
     ```
 1.  Execute the app!
 
+## Note
+### Currently the two packages used 'swipe_gesture_recognizer' and 'data_connection_checker' does not support Dart's null-safety, so even though the code supports Null-Safety the project won't execute. I am working towards replacing those pakcages and create my own implementation for that. Till then use this command to execute the project
+```
+        flutter run --no-sound-null-safety
+```
 <div><br><br></div>
 
 # Contact
