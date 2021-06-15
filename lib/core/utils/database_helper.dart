@@ -7,8 +7,8 @@ import 'package:path_provider/path_provider.dart';
 import '../../core/core.dart';
 
 class DatabaseHelper {
-  static DatabaseHelper _databaseHelper;
-  static Database _database; 
+  static DatabaseHelper? _databaseHelper;
+  static Database? _database; 
 
   String productsTable = 'products_table';
   String colProdId = 'prodId';
@@ -24,14 +24,14 @@ class DatabaseHelper {
       _databaseHelper = DatabaseHelper
           ._createInstance(); 
     }
-    return _databaseHelper;
+    return _databaseHelper!;
   }
 
   Future<Database> get database async {
     if (_database == null) {
       _database = await initializeDatabase();
     }
-    return _database;
+    return _database!;
   }
 
   Future<Database> initializeDatabase() async {
@@ -76,7 +76,7 @@ class DatabaseHelper {
     var noteMapList = await getProductsMapList();
     int count = noteMapList.length;
 
-    List<Product> noteList = List<Product>();
+    List<Product> noteList = [];
     // For loop to create a 'Note List' from a 'Map List'
     for (int i = 0; i < count; i++) {
       noteList.add(Product.fromMap(noteMapList[i]));

@@ -10,8 +10,8 @@ class ProductDetailsScreen extends StatefulWidget {
   final Product product;
 
   ProductDetailsScreen({
-    Key key,
-    @required this.product,
+    Key? key,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -21,8 +21,24 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _quantity = 1;
 
-  Size screenSize;
-  TextTheme textTheme;
+  String _prodImage = '';
+  String _prodName = '';
+  double _prodPrice = 0.0;
+
+  late Size screenSize;
+  late TextTheme textTheme;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _prodImage =
+        widget.product.prodImage != null ? widget.product.prodImage! : '';
+    _prodName =
+        widget.product.prodName != null ? widget.product.prodName! : 'Name';
+    _prodPrice =
+        widget.product.prodPrice != null ? widget.product.prodPrice! : 0.0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +53,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           //product Image
           Center(
             child: Image.network(
-              widget.product.prodImage,
+              _prodImage,
               height: screenSize.height * 0.3,
               width: screenSize.width,
               fit: BoxFit.contain,
@@ -54,7 +70,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             child: SizedBox(
               width: screenSize.width,
               child: Text(
-                widget.product.prodName,
+                _prodName,
                 style: textTheme.headline2,
               ),
             ),
@@ -82,11 +98,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Widget _buildAppBar() {
+  AppBar _buildAppBar() {
     return AppBar(
       leading: SizedBox(
         width: 42.0,
-        child: FlatButton(
+        child: TextButton(
           onPressed: () => locator.get<NavigationService>().navigateBack(),
           child: SvgPicture.asset(
             Assets.BACK,
@@ -97,7 +113,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       actions: [
         SizedBox(
           width: 56.0,
-          child: FlatButton(
+          child: TextButton(
             onPressed: () {},
             child: SvgPicture.asset(
               Assets.MENU,
@@ -232,7 +248,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   style: textTheme.headline3,
                   children: [
                     TextSpan(
-                      text: '₹ ${widget.product.prodPrice * _quantity}',
+                      text: '₹ ${_prodPrice * _quantity}',
                       style: textTheme.headline2,
                     ),
                   ],

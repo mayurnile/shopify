@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 
 import '../../core/core.dart';
@@ -11,8 +12,8 @@ class ProductCard extends StatefulWidget {
   final Product product;
 
   ProductCard({
-    Key key,
-    @required this.product,
+    Key? key,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -25,6 +26,18 @@ class _ProductCardState extends State<ProductCard> {
   //animation
   final Duration _animationDuration = Duration(milliseconds: 300);
   final Curve _animationCurve = Curves.easeInOutCubic;
+
+  String _prodImage = '';
+  String _prodName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _prodImage =
+        widget.product.prodImage != null ? widget.product.prodImage! : '';
+    _prodName =
+        widget.product.prodName != null ? widget.product.prodName! : 'Name';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +142,7 @@ class _ProductCardState extends State<ProductCard> {
                     children: [
                       //left part
                       Image.network(
-                        widget.product.prodImage,
+                        _prodImage,
                         height: screenSize.height * 0.2,
                         width: screenSize.width * 0.44,
                       ),
@@ -141,7 +154,7 @@ class _ProductCardState extends State<ProductCard> {
                           children: [
                             //product name
                             Text(
-                              widget.product.prodName,
+                              _prodName,
                               style: textTheme.headline4,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
@@ -154,7 +167,7 @@ class _ProductCardState extends State<ProductCard> {
                               fit: BoxFit.scaleDown,
                               child: Text(
                                 '₹ ${widget.product.prodPrice}',
-                                style: textTheme.headline5.copyWith(
+                                style: textTheme.headline5!.copyWith(
                                   decoration: TextDecoration.lineThrough,
                                 ),
                               ),

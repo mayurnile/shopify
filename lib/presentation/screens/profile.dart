@@ -33,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
           AutoSizeText(
             size: screenSize.width - 44.0,
             text: 'Your\nProfile',
-            style: textTheme.headline1.copyWith(height: 1.2),
+            style: textTheme.headline1!.copyWith(height: 1.2),
           ),
           //spacing
           SizedBox(height: 12.0),
@@ -41,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
           AutoSizeText(
             size: screenSize.width - 44.0,
             text: 'You can edit your profile here',
-            style: textTheme.headline3,
+            style: textTheme.headline3!,
           ),
           //spacing
           SizedBox(height: 22.0),

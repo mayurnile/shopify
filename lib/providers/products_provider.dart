@@ -8,9 +8,9 @@ import '../core/core.dart';
 import '../core/utils/utils.dart';
 
 class ProductsProvider extends GetxController {
-  List<Product> _productsList;
-  List<Product> _cartList;
-  ProductsState _state;
+  late List<Product> _productsList;
+  late List<Product> _cartList;
+  late ProductsState _state;
 
   @override
   void onInit() async {
@@ -75,14 +75,16 @@ class ProductsProvider extends GetxController {
     update();
   }
 
-  Future<void> addToCart({Product product, int quantity = 1}) async {
+  Future<void> addToCart({required Product product, int quantity = 1}) async {
     try {
-      Product existingProduct = _cartList.firstWhere(
+      Product? existingProduct = _cartList.firstWhere(
         (cartItem) => cartItem.prodId == product.prodId,
       );
+
       if (existingProduct != null) {
-        existingProduct.quantity += quantity;
+        existingProduct.quantity = existingProduct.quantity! + quantity;
       }
+
       update();
     } catch (e) {
       Product newProduct = Product(

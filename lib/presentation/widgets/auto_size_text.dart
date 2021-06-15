@@ -8,9 +8,9 @@ class AutoSizeText extends StatelessWidget {
   final Alignment alignment;
 
   AutoSizeText({
-    Key key,
-    @required this.text,
-    @required this.size,
+    Key? key,
+    required this.text,
+    required this.size,
     this.style = const TextStyle(),
     this.fit = BoxFit.scaleDown,
     this.alignment = Alignment.centerLeft,

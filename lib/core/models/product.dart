@@ -1,19 +1,17 @@
-import 'package:flutter/cupertino.dart';
-
 class Product {
-  final String prodId;
-  final String prodName;
-  final String prodImage;
-  final double prodPrice;
-  final double prodSellPrice;
-  int quantity;
+  final String? prodId;
+  final String? prodName;
+  final String? prodImage;
+  final double? prodPrice;
+  final double? prodSellPrice;
+  int? quantity;
 
   Product({
-    @required this.prodId,
-    @required this.prodName,
-    @required this.prodImage,
-    @required this.prodPrice,
-    @required this.prodSellPrice,
+    required this.prodId,
+    required this.prodName,
+    required this.prodImage,
+    required this.prodPrice,
+    required this.prodSellPrice,
     this.quantity = 1,
   });
 
@@ -28,13 +26,24 @@ class Product {
     return map;
   }
 
-  factory Product.fromMap(Map<String, dynamic> map) {
+  factory Product.fromMap(Map<String, dynamic>? map) {
+    if (map != null)
+      return Product(
+        prodId: map['prodId'] != null ? map['prodId'].toString() : '123',
+        prodName: map['prodName'] != null ? map['prodName'].toString() : 'Name',
+        prodImage: map['prodImage'] != null ? map['prodImage'].toString() : '',
+        prodPrice: map['prodPrice'] != null
+            ? double.parse('${map['prodPrice']}')
+            : 0.0,
+        prodSellPrice:
+            map['prodSell'] != null ? double.parse('${map['prodSell']}') : 0.0,
+      );
+
     return Product(
-      prodId: map['prodId'].toString(),
-      prodName: map['prodName'] as String,
-      prodImage: map['prodImage'] as String,
-      prodPrice: double.parse('${map['prodPrice']}'),
-      prodSellPrice: double.parse('${map['prodSell']}'),
-    );
+        prodId: '',
+        prodName: '',
+        prodImage: '',
+        prodPrice: 0.0,
+        prodSellPrice: 0.0);
   }
 }

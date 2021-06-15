@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
           AutoSizeText(
             size: screenSize.width - 44.0,
             text: 'Electronics\nCollection',
-            style: textTheme.headline1.copyWith(height: 1.2),
+            style: textTheme.headline1!.copyWith(height: 1.2),
           ),
           //spacing
           SizedBox(height: 12.0),
@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
             size: screenSize.width - 44.0,
             text:
                 'We provide a wide range of electronics of all\nbrand and types',
-            style: textTheme.headline3,
+            style: textTheme.headline3!,
           ),
           //spacing
           SizedBox(height: 22.0),

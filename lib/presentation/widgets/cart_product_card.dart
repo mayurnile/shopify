@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:swipe_gesture_recognizer/swipe_gesture_recognizer.dart';
 
 import '../../core/core.dart';
@@ -11,8 +12,8 @@ class CartProductCard extends StatefulWidget {
   final Product product;
 
   CartProductCard({
-    Key key,
-    @required this.product,
+    Key? key,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -25,6 +26,26 @@ class _CartProductCardState extends State<CartProductCard> {
   //animation
   final Duration _animationDuration = Duration(milliseconds: 300);
   final Curve _animationCurve = Curves.easeInOutCubic;
+
+  String _prodImage = '';
+  String _prodName = '';
+  double _prodSellPrice = 0.0;
+  int _prodQuantity = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _prodImage =
+        widget.product.prodImage != null ? widget.product.prodImage! : '';
+    _prodName =
+        widget.product.prodName != null ? widget.product.prodName! : 'Name';
+    _prodSellPrice = widget.product.prodSellPrice != null
+        ? widget.product.prodSellPrice!
+        : 0.0;
+    _prodQuantity = widget.product.quantity != null
+        ? widget.product.quantity!
+        : 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +137,7 @@ class _CartProductCardState extends State<CartProductCard> {
                     children: [
                       //left part
                       Image.network(
-                        widget.product.prodImage,
+                        _prodImage,
                         height: screenSize.height * 0.2,
                         width: screenSize.width * 0.44,
                       ),
@@ -128,7 +149,7 @@ class _CartProductCardState extends State<CartProductCard> {
                           children: [
                             //product name
                             Text(
-                              widget.product.prodName,
+                              _prodName,
                               style: textTheme.headline4,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
@@ -149,7 +170,7 @@ class _CartProductCardState extends State<CartProductCard> {
                               alignment: Alignment.centerLeft,
                               fit: BoxFit.scaleDown,
                               child: Text(
-                                '₹ ${widget.product.prodSellPrice * widget.product.quantity}',
+                                '₹ ${_prodSellPrice * _prodQuantity}',
                                 style: textTheme.headline4,
                               ),
                             ),

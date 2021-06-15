@@ -23,8 +23,8 @@ class _LandingScreenState extends State<LandingScreen> {
     ProfileScreen(),
   ];
 
-  Size screenSize;
-  TextTheme textTheme;
+  late Size screenSize;
+  late TextTheme textTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class _LandingScreenState extends State<LandingScreen> {
     );
   }
 
-  Widget _buildAppBar() {
+  AppBar _buildAppBar() {
     return AppBar(
       leading: AppLogo(),
       backgroundColor: Colors.transparent,
@@ -61,9 +61,11 @@ class _LandingScreenState extends State<LandingScreen> {
         //search button
         SizedBox(
           width: 42.0,
-          child: FlatButton(
+          child: TextButton(
             onPressed: () {},
-            padding: const EdgeInsets.all(0),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.all(0),
+            ),
             child: SvgPicture.asset(
               Assets.SEARCH,
               width: 22.0,
@@ -73,9 +75,11 @@ class _LandingScreenState extends State<LandingScreen> {
         //filter button
         SizedBox(
           width: 42.0,
-          child: FlatButton(
+          child: TextButton(
             onPressed: () {},
-            padding: const EdgeInsets.all(0),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.all(0),
+            ),
             child: SvgPicture.asset(
               Assets.FILTER,
               width: 22.0,

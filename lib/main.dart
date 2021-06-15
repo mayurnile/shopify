@@ -16,6 +16,7 @@ class Shopify extends StatelessWidget {
     return GetMaterialApp(
       title: 'My Notes',
       theme: ShopifyTheme.shopifyThemeData,
+      debugShowCheckedModeBanner: false,
       navigatorKey: di.locator<NavigationService>().navigatorKey,
       onGenerateRoute: generateRoute,
     );
